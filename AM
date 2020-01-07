@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<style type="text/css">
+		.w-h{height: 70vh;}
+		.foot{padding: 7px;background-color: black;color: white;}
+		.foot h3,b{color: yellow;} 
+		.line{height:2px;color:orange;}
+		.well,.navbar{margin: 0px;}
+		.well2{overflow: auto;}
+	</style>
+</head>
+<body ng-app="mo" ng-controller="cc">
+	<nav class="navbar navbar-inverse ">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Company website</a>
+			</div>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="active"><a href="#">HOME</a></li>
+				<li><a href="#">ABOUT</a></li>
+				<li><a href="#">OTHER</a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+			</ul>
+		</div>
+	</nav>
+	<!--navbar end here-->
+	<div class="row">
+		<div class="col-md-3 col-lg-3 col-sm-12 w-h well">
+			<ul class="nav nav-pills nav-stacked">
+				<li class="active"><a data-toggle="pill" href="#one">HOME</a></li>
+				<li><a data-toggle="pill" href="#two">Languages</a></li>
+				<li><a data-toggle="pill" href="#three">Categories</a></li>
+			</ul>
+		</div>
+		<div class="col-md-9 col-lg-9 col-sm-12 w-h well2">
+			<form>
+				<div class="form-group ">	<label>Select Countres</label>
+					<select class="form-control" ng-model="test">
+						<option ng-repeat="b in db" value="{{b.name}}">{{b.name}}</option>
+					</select>
+				</div>
+			</form>
+			<hr style="height: 2px;background-color: orange;">
+			<div class="row">
+				<div class="col-md-6 col-sm-12 col-md-offset-3 tab-content">
+
+					<div class="tab-pane active" id="one">
+
+
+						<div ng-repeat="b in db| filter:test" >
+							
+							<table class="table table-hover table-bordered">
+								<tr class="info">
+									<th>Country Name</th>
+									<th>{{b.name}}</th>
+								</tr>
+								<tr >
+									<td>capital</td>
+									<td>{{b.capital}}</td>
+								</tr>
+								<tr >
+									<td>region</td>
+									<td>{{b.region}}</td>
+								</tr>
+								<tr >
+									<td>Sub region</td>
+									<td>{{b.subregion}}</td>
+								</tr>
+								<tr >
+									<td> population</td>
+									<td>{{b.population}}</td>
+								</tr>
+								<tr >
+									<td> area</td>
+									<td>{{b.area}}</td>
+								</tr>
+								<tr >
+									<td> alpha3Code</td>
+									<td>{{b.alpha3Code}}</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div class="tab-pane" id="two">
+						<table class="table table-hover table-bordered">
+							<tr class="info">
+								<th>#</th>
+								<th> Name</th>
+								<th>Netive Name</th>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>India</td>
+								<td>+91</td>
+							</tr>
+						</table>					
+					</div>
+					<div class="tab-pane" id="three">
+						<table class="table table-hover table-bordered">
+							<tr class="info">
+								<th>#</th>
+								<th> Name</th>
+								<th>Code</th>
+								<th>Symbol</th>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>India</td>
+								<td>+91</td>
+								<td>Rs:</td>
+							</tr>
+						</table>					
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--footer area start-->
+	<div class="text-center foot">
+		<h3>https:/www.compamy.com</h3>
+		<p><b>Address : </b> 3rd block , near xyz , pune , Mahatastra.</p>
+		<p><b>Email ID : </b> company@gmail.com.com</p>
+		<p><b>Contact : </b>999999999 / 777777777.</p>
+	</div>
+	<script type="text/javascript">
+		var a=angular.module("mo",[]);
+		a.controller("cc",function($scope,$http){
+			$http.get("http://restcountries.eu/rest/v2/all").success(function(data){
+				$scope.db=data;
+			});
+			$http.get("http://restcountries.eu/rest/v2/alpha").success(function(data){
+				$scope.db2=data;
+			});	
+		});
+	</script>
+</body>
+</html>
